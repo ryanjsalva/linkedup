@@ -1,13 +1,17 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 
-import reducers from './reducers';
+import rootReducer from './reducers';
 import Scenes from './scenes';
 
-const middleware = []; // No middleware for now
-const store = compose(applyMiddleware(...middleware))(createStore)(reducers);
+const middlewares = [thunk];
 
-export default App = () => (<Provider store={store}>
-    <Scenes/>
-</Provider>);
+if (process.env.NODE_ENV === 'development') {
+    middlewares.push(require('redux-logger')());
+}
+
+const store = compose(applyMiddleware(...middlewares))(createStore)(rootReducer);
+
+export default App = () => (<Provider store={store}><Scenes/></Provider>);

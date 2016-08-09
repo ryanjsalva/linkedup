@@ -1,7 +1,15 @@
-export default eventReducer = ((state = [
-    { name: 'Event1', time: '1' },
-    { name: 'Event2', time: '2' },
-    { name: 'Event3', time: '3' },
-    { name: 'Event4', time: '4' },
-    { name: 'Event5', time: '5' }
-], action) => state);
+import {createReducer} from './index';
+import * as events from './../actions/eventActions';
+
+createReducer({
+    isFetching: false,
+    events: []
+}, {
+    [events.REQUEST_EVENTS](state, action) {
+        return {...state, isFetching: true};
+    },
+    [events.RECIEVE_EVENTS](state, action) {
+        console.log(state);
+        return {...state, isFetching: true };
+    }
+});
