@@ -1,15 +1,14 @@
 import {createReducer} from './index';
 import * as events from './../actions/eventActions';
 
-createReducer({
+export default createReducer({
     isFetching: false,
-    events: []
+    eventList: []
 }, {
-    [events.REQUEST_EVENTS](state, action) {
+    [events.REQUEST_EVENTS](state) {
         return {...state, isFetching: true};
     },
-    [events.RECIEVE_EVENTS](state, action) {
-        console.log(state);
-        return {...state, isFetching: true };
+    [events.RECEIVE_EVENTS](state, {payload}) {
+        return {...state, ...payload, isFetching: false};
     }
 });

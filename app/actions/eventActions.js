@@ -3,18 +3,16 @@ const shouldFetchEvents = (state, currentUser) => {
 }
 
 const requestEvents = (currentUser) => ({
-    type: REQUEST_EVENTS,
-    currentUser
+    type: REQUEST_EVENTS, payload: { currentUser }
 });
 
-const receiveEvents = (currentUser, events) => ({
-    type: RECEIVE_EVENTS,
-    events, currentUser
+const receiveEvents = (currentUser, eventList) => ({
+    type: RECEIVE_EVENTS, payload: { eventList, currentUser }
 });
 
 const fetchEventsFromServer = (currentUser) => (dispatch) => {
     dispatch(requestEvents(currentUser));
-    return fetch().then(val => dispatch(receiveEvents(val, currentUser)))
+    return fetch().then(response => dispatch(receiveEvents(currentUser, response)))
 }
 
 export const fetchEvents = (currentUser) => (dispatch, getState) => {
