@@ -1,7 +1,5 @@
-const initialState = {
-    userId: null
-};
+import {createReducer} from './index';
 
-export default function reducer(state = initialState, action = {}) {
-    return state;
-}
+export default createReducer({
+    userId: "1",
+}, {});

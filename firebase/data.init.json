@@ -1,0 +1,85 @@
+{
+    "events": {
+        "event1": {
+            "name": "Event1",
+            "location": "location",
+            "logo": "https://placeholdit.imgix.net/~text?txtsize=20&w=100&h=100&txt=Event1",
+            "details": "Lorem ipsum dolor sit amet, nusquam delectus dissentiet ex qui, cu vis audire epicurei. Mel an impetus diceret mnesarchum, quod invenire sea at. Mei ne ferri albucius omittantur, forensibus percipitur cotidieque sit id. Cu dico eius percipitur eum."
+        },
+        "event2": {
+            "name": "Event2",
+            "location": "location",
+            "logo": "https://placeholdit.imgix.net/~text?txtsize=20&w=100&h=100&txt=Event2",
+            "details": "Lorem ipsum dolor sit amet, nusquam delectus dissentiet ex qui, cu vis audire epicurei. Mel an impetus diceret mnesarchum, quod invenire sea at. Mei ne ferri albucius omittantur, forensibus percipitur cotidieque sit id. Cu dico eius percipitur eum."
+        },
+        "event3": {
+            "name": "Event3",
+            "location": "location",
+            "logo": "https://placeholdit.imgix.net/~text?txtsize=20&w=100&h=100&txt=Event3",
+            "details": "Lorem ipsum dolor sit amet, nusquam delectus dissentiet ex qui, cu vis audire epicurei. Mel an impetus diceret mnesarchum, quod invenire sea at. Mei ne ferri albucius omittantur, forensibus percipitur cotidieque sit id. Cu dico eius percipitur eum."
+        },
+        "event4": {
+            "name": "Event4",
+            "location": "location",
+            "logo": "https://placeholdit.imgix.net/~text?txtsize=20&w=100&h=100&txt=Event4",
+            "details": "Lorem ipsum dolor sit amet, nusquam delectus dissentiet ex qui, cu vis audire epicurei. Mel an impetus diceret mnesarchum, quod invenire sea at. Mei ne ferri albucius omittantur, forensibus percipitur cotidieque sit id. Cu dico eius percipitur eum."
+        },
+        "event5": {
+            "name": "Event5",
+            "location": "location",
+            "logo": "https://placeholdit.imgix.net/~text?txtsize=20&w=100&h=100&txt=Event5",
+            "details": "Lorem ipsum dolor sit amet, nusquam delectus dissentiet ex qui, cu vis audire epicurei. Mel an impetus diceret mnesarchum, quod invenire sea at. Mei ne ferri albucius omittantur, forensibus percipitur cotidieque sit id. Cu dico eius percipitur eum."
+        },
+        "event6": {
+            "name": "Event6",
+            "location": "location",
+            "logo": "https://placeholdit.imgix.net/~text?txtsize=20&w=100&h=100&txt=Event6",
+            "details": "Lorem ipsum dolor sit amet, nusquam delectus dissentiet ex qui, cu vis audire epicurei. Mel an impetus diceret mnesarchum, quod invenire sea at. Mei ne ferri albucius omittantur, forensibus percipitur cotidieque sit id. Cu dico eius percipitur eum."
+        }
+    },
+    "users": {
+        "user1": {
+            "name": "Parashuram",
+            "avatar": "https://placeholdit.imgix.net/~text?txtsize=20&w=100&h=100&txt=User1",
+            "events": {
+                "event1": {
+                    "name": "Event1",
+                    "location": "location",
+                    "logo": "https://placeholdit.imgix.net/~text?txtsize=20&w=100&h=100&txt=Event1"
+                },
+                "event2": {
+                    "name": "Event2",
+                    "location": "location",
+                    "logo": "https://placeholdit.imgix.net/~text?txtsize=20&w=100&h=100&txt=Event1"
+                }
+            }
+        },
+        "user2": {
+            "name": "Ryan J Salva",
+            "avatar": "https://placeholdit.imgix.net/~text?txtsize=20&w=100&h=100&txt=User1",
+            "events": {
+                "event2": {
+                    "name": "Event2",
+                    "location": "location",
+                    "logo": "https://placeholdit.imgix.net/~text?txtsize=20&w=100&h=100&txt=Event1"
+                }
+            }
+        },
+        "user3": {
+            "name": "Jordan",
+            "avatar": "https://placeholdit.imgix.net/~text?txtsize=20&w=100&h=100&txt=User1",
+            "events": {
+                "event1": {
+                    "name": "Event1",
+                    "location": "location",
+                    "logo": "https://placeholdit.imgix.net/~text?txtsize=20&w=100&h=100&txt=Event1"
+                },
+                "event3": {
+                    "name": "Event3",
+                    "location": "location",
+                    "logo": "https://placeholdit.imgix.net/~text?txtsize=20&w=100&h=100&txt=Event1"
+                }
+            }
+        }
+    }
+}

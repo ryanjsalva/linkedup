@@ -1,0 +1,10 @@
+{
+    "rules": {
+        "users": {
+            "$userid": {
+                ".read": "auth.uid == $userid",
+                ".write": "auth.uid == $userid"
+            }
+        },
+    }
+}

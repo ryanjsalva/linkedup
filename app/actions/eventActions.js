@@ -1,34 +1,17 @@
-const shouldFetchEvents = (state, currentUser) => {
-    return true; // TODO - Check if the Cache for this user is ready
-}
+import firebaseActionCreator from './firebaseActions';
 
-const requestEvents = (currentUser) => ({
-    type: REQUEST_EVENTS, payload: { currentUser }
+export const REQUEST_EVENTS = 'EVENTS.REQUEST';
+export const RECEIVE_EVENTS = 'EVENTS.RECEIVE';
+export const EVENTS_ERROR = 'EVENT.ERROR';
+
+export const fetchEvents = firebaseActionCreator({
+    shouldFetch: ((state, userId) => true), //TODO - Check the cache later instead of always fetching from server
+    request: (() => ({ type: REQUEST_EVENTS })),
+    receive: (eventList => ({ type: RECEIVE_EVENTS, payload: { eventList } })),
+    error: (error => ({ type: EVENTS_ERROR, payload: { error } })),
+    fetchFromServer: (firebaseApp, userId) => /*firebaseApp.database().ref(`/users/${userId}/events`).once('value')*/fetch()
 });
 
-const receiveEvents = (currentUser, eventList) => ({
-    type: RECEIVE_EVENTS, payload: { eventList, currentUser }
-});
-
-const fetchEventsFromServer = (currentUser) => (dispatch) => {
-    dispatch(requestEvents(currentUser));
-    return fetch().then(response => dispatch(receiveEvents(currentUser, response)))
-}
-
-export const fetchEvents = (currentUser) => (dispatch, getState) => {
-    if (shouldFetchEvents(getState(), currentUser)) {
-        return dispatch(fetchEventsFromServer(currentUser));
-    }
-};
-
-export const REQUEST_EVENTS = 'REQUEST_EVENTS';
-export const RECEIVE_EVENTS = 'RECIEVE_EVENTS';
-
-// Mock Server response
-// TODO - Fetch this from Firebase
-const fetch = () => Promise.resolve([
-    { name: 'Event1', time: 1 },
-    { name: 'Event2', time: 2 },
-    { name: 'Event3', time: 3 },
-    { name: 'Event4', time: 4 },
+const fetch = (firebase, userId) => Promise.resolve([
+    { name: 'event2' }, { name: 'event3' }, { name: 'event4' }, { name: 'event5' },
 ]);
