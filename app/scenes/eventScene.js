@@ -7,7 +7,9 @@ import { Actions } from 'react-native-router-flux';
 import {fetchEvent} from './../actions/eventActions';
 
 // TODO Linda to fill this in
-const EventDetails = ({event}) => <Text>{JSON.stringify(event) }</Text>;
+const EventDetails = ({event}) => {
+    return (<Text>{JSON.stringify(event) }</Text>)
+};
 // End event details
 
 class Scene extends React.Component {
