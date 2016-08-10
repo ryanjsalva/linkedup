@@ -9,7 +9,16 @@ export const fetchEvents = firebaseActionCreator({
     request: (() => ({ type: REQUEST_EVENTS })),
     receive: (eventList => ({ type: RECEIVE_EVENTS, payload: { eventList } })),
     error: (error => ({ type: EVENTS_ERROR, payload: { error } })),
-    fetchFromServer: (firebaseApp, userId) => /*firebaseApp.database().ref(`/users/${userId}/events`).once('value')*/fetch()
+    fetchFromServer: (firebaseApp, userId) => firebaseApp.database().ref(`/users/${userId}/events`).once('value').then((snap) => {
+        var items = [];
+        snap.forEach((child) => {
+            items.push({
+                val: child.val(),
+                _key: child.key
+            });
+        });
+        return items;
+    })
 });
 
 const fetch = (firebase, userId) => Promise.resolve([

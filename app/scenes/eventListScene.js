@@ -4,19 +4,21 @@ import { connect } from 'react-redux';
 
 import {fetchEvents} from './../actions/eventActions';
 
-const Event = (event) => (<View>
-    <Text>{JSON.stringify(event) }</Text>
+const Event = ({_key, val}) => (<View>
+    <Text>{_key}</Text>
+    <Text>{JSON.stringify(val)}</Text>
 </View>);
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-const Events = ({ events }) => (<View>
+const Events = (props) => (<View>
     <Text>
-        List of events
+        List of Events
     </Text>
-    <ListView
-        dataSource={ds.cloneWithRows(events) }
+     <ListView
+        dataSource={ds.cloneWithRows(props.eventList) }
         renderRow={(rowData) => <Event {...rowData}/>}
         />
+    <Refresh {...props}/>
 </View>);
 
 const NoEvents = (props) => (<View>
@@ -38,6 +40,10 @@ class EventsPage extends React.Component {
         this.handleRefresh = () => props.dispatch(fetchEvents(props.userId));
     }
 
+    componentDidMount() {
+        this.handleRefresh();
+    }
+
     renderComponent({route, eventList, isFetching, error}) {
         if (isFetching) {
             return <View><Text>Loading</Text></View>
@@ -46,12 +52,12 @@ class EventsPage extends React.Component {
         } else if (eventList.length === 0) {
             return <NoEvents onRefresh={this.handleRefresh}/>
         } else {
-            return <Events events={eventList} route={route}/>
+            return <Events eventList={eventList} route={route} onRefresh={this.handleRefresh}/>
         }
     }
 
     render() {
-        return (<View style={{marginTop: 60}}>
+        return (<View style={{ marginTop: 60 }}>
             {this.renderComponent(this.props) }
         </View>)
     }
