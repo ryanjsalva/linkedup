@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import {Container, Content, Header, Title, Icon, Button} from 'native-base';
+import {Container, Content, Header, Title, Button, Icon} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 class Scene extends React.Component {
@@ -11,15 +11,12 @@ class Scene extends React.Component {
                 <Button transparent onPress={Actions.pop}>
                     <Icon name="ios-arrow-back" />
                 </Button>
-                <Title>Event Details</Title>
+                <Title>Create Event</Title>
             </Header>
             <Content>
                 <Text>
-                    Placeholder for a Single Event Screen for {this.props.eventId}
+                    Placeholder for Create Events SCene Screen
                 </Text>
-                <Button block onPress={() => Actions.match({ eventId: this.props.eventId }) }>
-                    <Text>Match</Text>
-                </Button>
             </Content>
         </Container>);
     }

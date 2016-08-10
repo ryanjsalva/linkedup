@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, TouchableHighlight, Text, StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
-import {Container, Content, Spinner, List, ListItem, Thumbnail, Icon} from 'native-base';
+import {Container, Content, Spinner, List, ListItem, Thumbnail, Icon, Header, Button, Title} from 'native-base';
+import { Actions } from 'react-native-router-flux';
 
 import {fetchEvents} from './../actions/eventActions';
 
 const Event = ({_key, val}) => (
-    <ListItem>
+    <ListItem button onPress={() => Actions.event({eventId: _key})}>
         <Thumbnail square size={40} source={{ uri: val.logo }}/>
         <Text>{val.name}</Text>
         <Text note>{val.location}</Text>
@@ -56,9 +57,20 @@ class EventsPage extends React.Component {
     }
 
     render() {
-        return (<Container style={{ marginTop: 60 }}><Content>
-            {this.renderComponent(this.props) }
-        </Content></Container>)
+        return (<Container>
+            <Header>
+                <Button transparent>
+                    <Icon name="ios-menu"/>
+                </Button>
+                <Title>Events</Title>
+                <Button transparent onPress={() => Actions.createEvent() }>
+                    <Icon name="ios-menu" />
+                </Button>rr
+            </Header>
+            <Content>
+                {this.renderComponent(this.props) }
+            </Content>
+        </Container >)
     }
 }
 

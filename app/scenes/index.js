@@ -8,6 +8,8 @@ import LoginScene from './loginScene';
 import EventListScene from './eventListScene';
 import ChatScene from './chatScene';
 import EventScene from './eventScene';
+import CreateEventScene from './createEventScene';
+import MatchScene from './matchScene';
 
 const RouterWithRedux = connect()(Router);
 
@@ -22,5 +24,7 @@ export default Scenes = (() => (<RouterWithRedux>
             <Scene key="chat" component={ChatScene} title="Chat"  icon={TabIcon} hideNavBar={true}/>
         </Scene>
         <Scene key="event" component={EventScene} title="Event"/>
+        <Scene key="createEvent" component={CreateEventScene} title="Create Event"/>
+        <Scene key="match" component={MatchScene} title="Match"/>
     </Scene>
 </RouterWithRedux>));
