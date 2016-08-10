@@ -60,11 +60,11 @@ class EventsPage extends React.Component {
         return (<Container>
             <Header>
                 <Button transparent>
-                    <Icon name="ios-menu"/>
+                    <Icon name="ios-cafe-outline"/>
                 </Button>
                 <Title>Events</Title>
                 <Button transparent onPress={() => Actions.createEvent() }>
-                    <Icon name="ios-menu" />
+                    <Icon name="ios-create-outline" />
                 </Button>rr
             </Header>
             <Content>
