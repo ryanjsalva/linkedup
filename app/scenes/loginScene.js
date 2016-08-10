@@ -32,8 +32,9 @@ class Login extends React.Component {
             return <View><Spinner/></View>
         } else if (this.props.error) {
             return <LoginError doLogin={() => this.doLogin() }/>
-        }
-        else {
+        } else if (this.props.currentUserId) {
+            setTimeout(() => Actions.maintabs(), 10);
+        } else {
             return <LoginScreen doLogin={() => this.doLogin() }/>
         }
     }
