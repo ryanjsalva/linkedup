@@ -7,19 +7,22 @@ import { Actions } from 'react-native-router-flux';
 import {fetchEvents} from './../actions/eventActions';
 
 const Event = ({_key, val}) => (
-    <ListItem button onPress={() => Actions.event({eventId: _key})}>
+    <ListItem button onPress={() => Actions.event({ eventId: _key }) }>
         <Thumbnail square size={40} source={{ uri: val.logo }}/>
         <Text>{val.name}</Text>
         <Text note>{val.location}</Text>
     </ListItem>
 );
 
-const Events = (props) => (<View>
-    <List
-        dataArray={props.eventList}
-        renderRow={(rowData) => <Event {...rowData}/>}
-        />
-</View>);
+const Events = (props) => {
+    var items = [];
+    for (var _key in props.eventList) {
+        items.push({ _key, val: props.eventList[_key] })
+    }
+    return (
+        <List dataArray={items}
+            renderRow={(rowData) => <Event {...rowData}/>}/>)
+};
 
 const NoEvents = (props) => (<View style={styles.centerContent}>
     <Text>No events Found</Text>

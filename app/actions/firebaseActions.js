@@ -19,3 +19,12 @@ export default firebaseActionCreator = ({
             (err) => dispatch(error(err, ...args)))
     }
 }
+
+export const firebaseMap = (snap) => {
+    var items = {};
+    snap.forEach((child) => { items[child.key] = child.val() });
+    return items;
+};
+
+export const firebaseDBOnce = (firebaseApp, path) =>
+    firebaseApp.database().ref(path).once('value').then(firebaseMap)

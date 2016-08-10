@@ -3,7 +3,7 @@ import * as events from './../actions/eventActions';
 
 export default createReducer({
     isFetching: false,
-    eventList: []
+    eventList: {}
 }, {
     [events.REQUEST_EVENTS](state) {
         return {...state, isFetching: true};
