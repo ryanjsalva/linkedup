@@ -12,7 +12,7 @@ class Login extends React.Component {
                     <View style={styles.centerContent}>
                         <Text style={{ fontSize: 20 }}>Click the button to log in.</Text>
                         <View style={{ marginTop: 20 }}>
-                            <Button onPress={Actions.events} >
+                            <Button onPress={Actions.maintabs} >
                                 Login
                             </Button>
                         </View>

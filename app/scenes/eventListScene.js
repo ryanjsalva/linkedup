@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableHighlight, Text, StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
-import {Container, Content, Spinner, List, ListItem, Thumbnail} from 'native-base';
+import {Container, Content, Spinner, List, ListItem, Thumbnail, Icon} from 'native-base';
 
 import {fetchEvents} from './../actions/eventActions';
 
