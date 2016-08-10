@@ -17,8 +17,9 @@ export const fetchEvents = firebaseActionCreator({
 });
 
 export const fetchEvent = firebaseActionCreator({
-    shouldFetch: ((state, userId) => true), //TODO - Check the cache later instead of always fetching from server
+    shouldFetch: ((state, eventId) => true), //TODO - Check the cache later instead of always fetching from server
     request: (() => ({ type: REQUEST_EVENT })),
     receive: (eventList => ({ type: RECEIVE_EVENT, payload: { eventList } })),
     error: (error => ({ type: EVENT_ERROR, payload: { error } })),
+    fetchFromServer: (firebaseApp, eventId) => firebaseDBOnce(firebaseApp, `/events/${eventId}`)
 });

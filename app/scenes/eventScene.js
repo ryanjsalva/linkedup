@@ -4,7 +4,36 @@ import { connect } from 'react-redux';
 import {Container, Content, Header, Title, Icon, Button} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
+import {fetchEvent} from './../actions/eventActions';
+
+// TODO Linda to fill this in
+const EventDetails = (props) => <Text>{JSON.stringify(props)}</Text>;
+// End event details
+
 class Scene extends React.Component {
+    refreshEvent() {
+        this.props.dispatch(fetchEvent(this.props.eventId));
+    }
+
+    componentDidMount() {
+        this.refreshEvent(); // TODO - do this after animation is complete
+    }
+
+    renderContent() {
+        if (this.props.isFetching) {
+            return <Spinner/>
+        } else if (this.props.error) {
+            return <Text>Error</Text>
+        } else {
+            return (<View>
+                <EventDetails event={this.props.eventList[this.props.eventId]}/>
+                <Button block onPress={() => Actions.match({ eventId: this.props.eventId }) }>
+                    <Text>Match</Text>
+                </Button>
+            </View>);
+        }
+    }
+
     render() {
         return (<Container>
             <Header>
@@ -14,15 +43,11 @@ class Scene extends React.Component {
                 <Title>Event Details</Title>
             </Header>
             <Content>
-                <Text>
-                    Placeholder for a Single Event Screen for {this.props.eventId}
-                </Text>
-                <Button block onPress={() => Actions.match({ eventId: this.props.eventId }) }>
-                    <Text>Match</Text>
-                </Button>
+                {this.renderContent() }
             </Content>
         </Container>);
     }
 }
 
-export default connect()(Scene);
+const mapStateToProps = (({ events: {eventList, isFetching, error}}) => ({ eventList, isFetching, error }));
+export default connect(mapStateToProps)(Scene);
