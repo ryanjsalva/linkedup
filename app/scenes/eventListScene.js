@@ -1,27 +1,26 @@
 import React from 'react';
-import { View, TouchableHighlight, Text, ListView } from 'react-native';
+import { View, TouchableHighlight, Text, StyleSheet} from 'react-native';
 import { connect } from 'react-redux';
+import {Container, Content, Spinner, List, ListItem, Thumbnail} from 'native-base';
 
 import {fetchEvents} from './../actions/eventActions';
 
-const Event = ({_key, val}) => (<View>
-    <Text>{_key}</Text>
-    <Text>{JSON.stringify(val)}</Text>
-</View>);
+const Event = ({_key, val}) => (
+    <ListItem>
+        <Thumbnail square size={40} source={{ uri: val.logo }}/>
+        <Text>{val.name}</Text>
+        <Text note>{val.location}</Text>
+    </ListItem>
+);
 
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 const Events = (props) => (<View>
-    <Text>
-        List of Events
-    </Text>
-     <ListView
-        dataSource={ds.cloneWithRows(props.eventList) }
+    <List
+        dataArray={props.eventList}
         renderRow={(rowData) => <Event {...rowData}/>}
         />
-    <Refresh {...props}/>
 </View>);
 
-const NoEvents = (props) => (<View>
+const NoEvents = (props) => (<View style={styles.centerContent}>
     <Text>No events Found</Text>
     <Refresh {...props}/>
 </View>);
@@ -32,7 +31,7 @@ const Refresh = ({onRefresh}) => (
     </TouchableHighlight>
 );
 
-const Error = () => (<View><Text>Error loading events</Text></View>);
+const Error = () => (<View><Spinner/></View>);
 
 class EventsPage extends React.Component {
     constructor(props) {
@@ -46,7 +45,7 @@ class EventsPage extends React.Component {
 
     renderComponent({route, eventList, isFetching, error}) {
         if (isFetching) {
-            return <View><Text>Loading</Text></View>
+            return <View style={styles.centerContent}><Spinner/></View>
         } else if (error) {
             return <View><Text>Error Try Again</Text><Refresh onRefresh={this.handleRefresh}/></View>
         } else if (eventList.length === 0) {
@@ -57,11 +56,20 @@ class EventsPage extends React.Component {
     }
 
     render() {
-        return (<View style={{ marginTop: 60 }}>
+        return (<Container style={{ marginTop: 60 }}><Content>
             {this.renderComponent(this.props) }
-        </View>)
+        </Content></Container>)
     }
 }
 
 const mapStateToProps = (({ route, events: {eventList, isFetching, error}, currentUser: {userId} }) => ({ route, eventList, userId, isFetching, error }));
 export default connect(mapStateToProps)(EventsPage);
+
+var styles = StyleSheet.create({
+    centerContent: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
