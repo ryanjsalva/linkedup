@@ -2,12 +2,12 @@ import { combineReducers } from 'redux';
 
 import routes from './routeReducer';
 import events from './eventReducer'
-import currentUser from './currentUserReducer';
+import users from './userReducer';
 
 export default combineReducers({
     events,
     routes,
-    currentUser
+    users
 });
 
 export function createReducer(initialState, handlers) {

@@ -37,7 +37,7 @@ const Error = () => (<View><Spinner/></View>);
 class EventsPage extends React.Component {
     constructor(props) {
         super(props);
-        this.handleRefresh = () => props.dispatch(fetchEvents(props.userId));
+        this.handleRefresh = () => props.dispatch(fetchEvents(props.currentUserId));
     }
 
     componentDidMount() {
@@ -65,7 +65,7 @@ class EventsPage extends React.Component {
                 <Title>Events</Title>
                 <Button transparent onPress={() => Actions.createEvent() }>
                     <Icon name="ios-create-outline" />
-                </Button>rr
+                </Button>
             </Header>
             <Content>
                 {this.renderComponent(this.props) }
@@ -74,7 +74,7 @@ class EventsPage extends React.Component {
     }
 }
 
-const mapStateToProps = (({ route, events: {eventList, isFetching, error}, currentUser: {userId} }) => ({ route, eventList, userId, isFetching, error }));
+const mapStateToProps = (({ route, events: {eventList, isFetching, error}, users: {currentUserId} }) => ({ route, eventList, currentUserId, isFetching, error }));
 export default connect(mapStateToProps)(EventsPage);
 
 var styles = StyleSheet.create({
