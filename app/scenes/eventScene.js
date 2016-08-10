@@ -7,7 +7,7 @@ import { Actions } from 'react-native-router-flux';
 import {fetchEvent} from './../actions/eventActions';
 
 // TODO Linda to fill this in
-const EventDetails = (props) => <Text>{JSON.stringify(props)}</Text>;
+const EventDetails = ({event}) => <Text>{JSON.stringify(event) }</Text>;
 // End event details
 
 class Scene extends React.Component {
@@ -26,7 +26,7 @@ class Scene extends React.Component {
             return <Text>Error</Text>
         } else {
             return (<View>
-                <EventDetails event={this.props.eventList[this.props.eventId]}/>
+                <EventDetails event={this.props.event}/>
                 <Button block onPress={() => Actions.match({ eventId: this.props.eventId }) }>
                     <Text>Match</Text>
                 </Button>
@@ -49,5 +49,5 @@ class Scene extends React.Component {
     }
 }
 
-const mapStateToProps = (({ events: {eventList, isFetching, error}}) => ({ eventList, isFetching, error }));
+const mapStateToProps = (({ events: {eventList, isFetching, error}}, {eventId}) => ({ event: eventList[eventId], isFetching, error }));
 export default connect(mapStateToProps)(Scene);
