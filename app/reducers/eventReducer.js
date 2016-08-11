@@ -13,5 +13,14 @@ export default createReducer({
     },
     [events.EVENTS_ERROR](state, {payload}) {
         return {...state, isFetching: false, error : payload};
+    },
+    [events.REQUEST_EVENT](state) {
+        return {...state, isFetching: true};
+    },
+    [events.RECEIVE_EVENT](state, {payload : {eventId, eventDetails} }) {
+        return {...state, isFetching: false, eventList: {...state.eventList, [eventId] : eventDetails}};
+    },
+    [events.EVENT_ERROR](state, {payload}) {
+        return {...state, isFetching: false, error : payload};
     }
 });

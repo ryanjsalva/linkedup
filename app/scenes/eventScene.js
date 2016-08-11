@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
-import {Container, Content, Header, Title, Icon, Button} from 'native-base';
+import {Container, Spinner, Content, Header, Title, Icon, Button} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 import {fetchEvent} from './../actions/eventActions';
@@ -11,7 +11,7 @@ import {fetchEvent} from './../actions/eventActions';
 const EventDetails = ({event}) => {
     return (
         <View>
-            <Image style= {{ height:250, width: 250 }} source={{uri: event.logo}} />
+            <Image style= {{ height: 250, width: 250 }} source={{ uri: event.logo }} />
             <Text>{event.name}</Text>
             <Text>{event.location}</Text>
         </View>
@@ -26,7 +26,7 @@ class Scene extends React.Component {
     }
 
     componentDidMount() {
-        this.refreshEvent(); // TODO - do this after animation is complete
+        setTimeout(() => this.refreshEvent(), 1000); // TODO - do this after animation is complete
     }
 
     renderContent() {
