@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import {Container, Content, Header, Title, Icon, Button} from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -7,8 +7,16 @@ import { Actions } from 'react-native-router-flux';
 import {fetchEvent} from './../actions/eventActions';
 
 // TODO Linda to fill this in
+
 const EventDetails = ({event}) => {
-    return (<Text>{JSON.stringify(event) }</Text>)
+    return (
+        <View>
+            <Image style= {{ height:250, width: 250 }} source={{uri: event.logo}} />
+            <Text>{event.name}</Text>
+            <Text>{event.location}</Text>
+        </View>
+
+    )
 };
 // End event details
 
@@ -43,6 +51,9 @@ class Scene extends React.Component {
                     <Icon name="ios-arrow-back" />
                 </Button>
                 <Title>Event Details</Title>
+                <Button transparent>
+                    <Text>Edit</Text>
+                </Button>
             </Header>
             <Content>
                 {this.renderContent() }
