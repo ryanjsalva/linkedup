@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
-import {Container, Content, Header, Title, Button, Icon} from 'native-base';
+import {Container, Content, Header, Title, Button, Icon, List, ListItem, InputGroup, Input} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 class Scene extends React.Component {
@@ -14,9 +14,34 @@ class Scene extends React.Component {
                 <Title>Create Event</Title>
             </Header>
             <Content>
-                <Text>
-                    Placeholder for Create Events SCene Screen
-                </Text>
+
+                {/* <TouchableHighlight onPress={this._onPressButton}> */}
+                <TouchableHighlight>
+                    <Image
+                        style={{height: 250, width: 250}}
+                        source={require('../assets/add_logo.png') }
+                        />
+                </TouchableHighlight>
+
+                <List>
+                    <ListItem>
+                        <InputGroup>
+                            <Input placeholder="Event Name"/>
+                        </InputGroup>
+                    </ListItem>
+
+                    <ListItem>
+                        <InputGroup>
+                            <Input placeholder="Location"/>
+                        </InputGroup>
+                    </ListItem>
+
+                    {/* <Button onPress={doLogin} > */}
+                    <Button >
+                        Create Event
+                    </Button>
+
+                </List>
             </Content>
         </Container>);
     }
