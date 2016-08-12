@@ -14,6 +14,7 @@ const EventDetails = ({event}) => {
             <Image style= {{ height: 250, width: 250 }} source={{ uri: event.logo }} />
             <Text>{event.name}</Text>
             <Text>{event.location}</Text>
+            <Text>{event.details}</Text>
         </View>
 
     )
@@ -26,7 +27,18 @@ class Scene extends React.Component {
     }
 
     componentDidMount() {
-        setTimeout(() => this.refreshEvent(), 1000); // TODO - do this after animation is complete
+        this.refreshEvent(); // TODO - do this after animation is complete 
+    }
+
+    renderButton() {
+        if (this.props.currentUserId == this.props.event.owner) {
+        return (
+            <Button transparent>
+                    <Text>Edit</Text>
+                </Button>
+        );
+        }
+
     }
 
     renderContent() {
@@ -51,9 +63,7 @@ class Scene extends React.Component {
                     <Icon name="ios-arrow-back" />
                 </Button>
                 <Title>Event Details</Title>
-                <Button transparent>
-                    <Text>Edit</Text>
-                </Button>
+                {this.renderButton() }
             </Header>
             <Content>
                 {this.renderContent() }
@@ -62,5 +72,5 @@ class Scene extends React.Component {
     }
 }
 
-const mapStateToProps = (({ events: {eventList, isFetching, error}}, {eventId}) => ({ event: eventList[eventId], isFetching, error }));
+const mapStateToProps = (({ users: {currentUserId}, events: {eventList, isFetching, error}}, {eventId}) => ({ currentUserId, event: eventList[eventId], isFetching, error }));
 export default connect(mapStateToProps)(Scene);
