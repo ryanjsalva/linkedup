@@ -44,10 +44,10 @@ class EventsPage extends React.Component {
     }
 
     componentDidMount() {
-        this.handleRefresh();
+       setTimeout(()=> this.handleRefresh(), 1000);
     }
 
-    renderComponent({route, eventList, isFetching, error}) {
+    renderComponent({eventList, isFetching, error}) {
         if (isFetching) {
             return <View style={styles.centerContent}><Spinner/></View>
         } else if (error) {
@@ -55,7 +55,7 @@ class EventsPage extends React.Component {
         } else if (eventList.length === 0) {
             return <NoEvents onRefresh={this.handleRefresh}/>
         } else {
-            return <Events eventList={eventList} route={route} onRefresh={this.handleRefresh}/>
+            return <Events eventList={eventList} onRefresh={this.handleRefresh}/>
         }
     }
 
@@ -77,7 +77,7 @@ class EventsPage extends React.Component {
     }
 }
 
-const mapStateToProps = (({ route, events: {eventList, isFetching, error}, users: {currentUserId} }) => ({ route, eventList, currentUserId, isFetching, error }));
+const mapStateToProps = (({events: {eventList, isFetching, error}, users: {currentUserId} }) => ({eventList, currentUserId, isFetching, error }));
 export default connect(mapStateToProps)(EventsPage);
 
 var styles = StyleSheet.create({

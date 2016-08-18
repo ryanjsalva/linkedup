@@ -27,7 +27,7 @@ class Scene extends React.Component {
     }
 
     componentDidMount() {
-        this.refreshEvent(); // TODO - do this after animation is complete 
+        setTimeout(() => this.refreshEvent(), 500); // TODO - do this after animation is complete 
     }
 
     renderButton() {
@@ -42,13 +42,12 @@ class Scene extends React.Component {
     }
 
     renderContent() {
-        if (this.props.isFetching) {
-            return <Spinner/>
-        } else if (this.props.error) {
+       if (this.props.error) {
             return <Text>Error</Text>
         } else {
             return (<View>
                 <EventDetails event={this.props.event}/>
+                {this.props.isFetching && <Spinner/>}
                 <Button block onPress={() => Actions.match({ eventId: this.props.eventId }) }>
                     <Text>Match</Text>
                 </Button>
