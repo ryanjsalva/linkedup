@@ -4,11 +4,19 @@ import { connect } from 'react-redux';
 import {Container, Content, Header, Button, Title} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
-import {logout} from './../actions/userActions';
+import {logout, viewProfile} from './../actions/userActions';
 
 class Scene extends React.Component {
+    loadProfile() {
+        this.props.dispatch(viewProfile(this.props.currentUserId));
+    }
+
     doLogout() {
         this.props.dispatch(logout());
+    }
+
+    componentDidMount() {
+        loadProfile();
     }
 
     componentWillReceiveProps() {
