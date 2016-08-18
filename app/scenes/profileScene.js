@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import {Container, Content, Header, Button, Title} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
-import {logoutRequest} from './../actions/userActions';
+import {logout} from './../actions/userActions';
 
 class Scene extends React.Component {
     doLogout() {
-        this.props.dispatch(logoutRequest());
+        this.props.dispatch(logout());
     }
 
     componentWillReceiveProps() {

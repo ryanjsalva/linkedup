@@ -1,26 +1,13 @@
-import {createReducer} from './index';
-import * as events from './../actions/eventActions';
+import {createFirebaseActionReducer} from './index';
+import {ACTION_TYPES} from './../actions/eventActions';
 
-export default createReducer({
-    isFetching: false,
+export default createFirebaseActionReducer({
     eventList: {}
 }, {
-    [events.REQUEST_EVENTS](state) {
-        return {...state, isFetching: true};
+    [ACTION_TYPES.EVENTS](state, eventList) {
+        return {...state, eventList};
     },
-    [events.RECEIVE_EVENTS](state, {payload}) {
-        return {...state, ...payload, isFetching: false};
-    },
-    [events.EVENTS_ERROR](state, {payload}) {
-        return {...state, isFetching: false, error : payload};
-    },
-    [events.REQUEST_EVENT](state) {
-        return {...state, isFetching: true};
-    },
-    [events.RECEIVE_EVENT](state, {payload : {eventId, eventDetails} }) {
-        return {...state, isFetching: false, eventList: {...state.eventList, [eventId] : eventDetails}};
-    },
-    [events.EVENT_ERROR](state, {payload}) {
-        return {...state, isFetching: false, error : payload};
+    [ACTION_TYPES.EVENT](state, eventDetails, {eventId}) {
+        return {...state, eventList: {...state.eventList, [eventId] : eventDetails}};
     }
 });

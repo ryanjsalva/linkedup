@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import {Container, Content, Button, Spinner} from 'native-base';
 
-import {loginRequest} from './../actions/userActions';
+import {login} from './../actions/userActions';
 
 const LoginScreen = ({doLogin}) => (
     <View style={styles.centerContent}>
@@ -24,7 +24,7 @@ const LoginError = ({ doLogin }) => (
 
 class Login extends React.Component {
     doLogin() {
-        this.props.dispatch(loginRequest());
+        this.props.dispatch(login());
     }
 
     renderContent() {
