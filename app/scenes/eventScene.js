@@ -1,25 +1,31 @@
 import React from 'react';
 import { View, Text, Image, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
-import {Container, Spinner, Content, Header, Title, Icon, Button} from 'native-base';
+import {Container, Spinner, Card, CardItem, Thumbnail, Content, Header, Title, Icon, Button} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 import {fetchEvent} from './../actions/eventActions';
 
-// TODO Linda to fill this in
-
 const EventDetails = ({event}) => {
     return (
-        <View>
-            <Image style= {{ height: 250, width: 250 }} source={{ uri: event.logo }} />
-            <Text>{event.name}</Text>
-            <Text>{event.location}</Text>
-            <Text>{event.details}</Text>
-        </View>
+        <Card>
+            <CardItem >
+                <Thumbnail source={{ uri: event.logo }}/>
+                <Text>{event.name}</Text>
+                <Text note>{event.location}</Text>
+            </CardItem>
+            <CardItem>
+                <Image style={{ resizeMode: 'cover' }} source={{ uri: event.logo }}  />
+            </CardItem>
 
+            <CardItem cardBody>
+                <Text>
+                    {event.details}
+                </Text>
+            </CardItem>
+        </Card>
     )
 };
-// End event details
 
 class Scene extends React.Component {
     refreshEvent() {
@@ -32,23 +38,23 @@ class Scene extends React.Component {
 
     renderButton() {
         if (this.props.currentUserId == this.props.event.owner) {
-        return (
-            <Button transparent>
+            return (
+                <Button transparent>
                     <Text>Edit</Text>
                 </Button>
-        );
+            );
         }
 
     }
 
     renderContent() {
-       if (this.props.error) {
+        if (this.props.error) {
             return <Text>Error</Text>
         } else {
             return (<View>
                 <EventDetails event={this.props.event}/>
                 {this.props.isFetching && <Spinner/>}
-                <Button block onPress={() => Actions.match({ eventId: this.props.eventId }) }>
+                <Button onPress={() => Actions.match({ eventId: this.props.eventId }) }>
                     <Text>Match</Text>
                 </Button>
             </View>);
