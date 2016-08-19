@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Spinner, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import {Container, Content, Header, Button, Title} from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -9,7 +9,6 @@ import {logout, viewProfile} from './../actions/userActions';
 const UserDetails = ({profile}) => {
     return (
         <Container>
-            <Image source={{uri: profile.avatar}} style={{width: 40, height: 40}} />
             <Text>{profile.name}</Text>
         </Container>
     );
@@ -25,7 +24,7 @@ class Scene extends React.Component {
     }
 
     componentDidMount() {
-        loadProfile();
+        setTimeout(() => this.loadProfile(), 500);
     }
 
     componentWillReceiveProps() {
@@ -35,13 +34,17 @@ class Scene extends React.Component {
         }
     }
 
-    renderContent() {
-        if (this.props.error) {
-            return <Text>Error</Text>
+    renderComponent({currentUserId, user, isFetching, error}) {
+        if (error) {
+            return <Text>Error</Text>;
+        } else if (isFetching) {
+            return <View style={styles.centerContent}><Spinner/></View>
+        }  else if (user == null) {
+            return <View style={styles.centerContent}><Spinner/></View>
         } else {
             return (<View>
-                <UserDetails profile={this.props.userProfile}/>
-                {this.props.isFetching && <Spinner/>}
+                <UserDetails profile={user}/>
+                {isFetching && <Spinner/>}
             </View>);
         }
     }
@@ -52,7 +55,7 @@ class Scene extends React.Component {
                 <Title>Your Profile</Title>
             </Header>
             <Content>
-                {this.renderContent()}
+                {this.renderComponent(this.props) }
                 <Button onPress={() => this.doLogout() }>
                     <Text>Logout</Text>
                 </Button>
@@ -61,5 +64,14 @@ class Scene extends React.Component {
     }
 }
 
-const mapStateToProps = (({users: {currentUserId, isFetching, error} }) => ({ currentUserId, isFetching, error }));
+const mapStateToProps = (({ users: {currentUserId, userList, isFetching, error}}, {userId}) => ({ currentUserId, user: userList[userId], isFetching, error }));
 export default connect(mapStateToProps)(Scene);
+
+var styles = StyleSheet.create({
+    centerContent: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
