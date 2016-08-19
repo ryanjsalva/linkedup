@@ -9,4 +9,4 @@ export const ACTION_TYPES = {
 //TODO - Login is currently mocked, this needs to be real firebase login
 export const login = (userId) => createFirebaseAction(ACTION_TYPES.LOGIN, 'user1', null, Promise.resolve);
 export const logout = (eventId) => createFirebaseAction(ACTION_TYPES.LOGOUT, null, null, Promise.resolve);
-export const viewProfile = (userId) => createFirebaseAction(ACTION_TYPES.PROFILE, `/users/${userId}`, null);
+export const viewProfile = (userId) => createFirebaseAction(ACTION_TYPES.PROFILE, `/users/${userId}`, {avatar, name});
